@@ -32,10 +32,12 @@ class ClienteDetails(APIView):
 
     def put(self, request, pk):
         print("Entrando a la actualizacion")
-        cliente = self.get_object(pk)
+        cliente = Cliente.objects.filter(pk=pk).first()
         serializer = ClienteSerializer(cliente, data=request.data)
         if serializer.is_valid():
             serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UserList(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
