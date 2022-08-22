@@ -8,11 +8,14 @@ class Cliente(models.Model):
     dni = models.IntegerField()
     direccion = models.TextField(max_length=50)
     tipo_cliente = models.TextField(max_length=20)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    owner = models.ForeignKey('auth.User', related_name='libros',on_delete=models.CASCADE)
 
 class Meta:
-    ordering = ("-tipo_cliente",)
+    ordering = ("-created_at",)
     verbose_name = "Cliente"
     verbose_name_plural = "Clientes"
 
 def __str__(self):
-    return self.title
+    return self.nombre
