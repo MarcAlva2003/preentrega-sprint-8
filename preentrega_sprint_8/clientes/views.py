@@ -7,6 +7,7 @@ from rest_framework import status,generics,permissions
 from django.contrib.auth.models import User
 # Create your views here.
 class ClienteLists(APIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     def post(self, request, format=None):
         serializer = ClienteSerializer(data=request.data)
         if serializer.is_valid():
@@ -22,6 +23,7 @@ class ClienteLists(APIView):
 
 
 class ClienteDetails(APIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     def get(self, request, pk):
         cliente =Cliente.objects.filter(pk=pk).first()
         serializer = ClienteSerializer(cliente)
