@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'api_tarjetas',
     'clientes',
     'sucursales',
+    'prestamos',
 ]
 
 MIDDLEWARE = [
